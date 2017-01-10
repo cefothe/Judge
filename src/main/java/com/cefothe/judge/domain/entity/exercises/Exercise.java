@@ -25,10 +25,9 @@ public class Exercise extends EntityAdapter{
 
     }
 
-    public Exercise(String exerciseName, String conditionTask, List<ExerciseTest> exerciseTest) {
+    public Exercise(String exerciseName, String conditionTask) {
         this.exerciseName = exerciseName;
         this.conditionTask = conditionTask;
-        this.exerciseTest = exerciseTest;
     }
 
     public String getExerciseName() {

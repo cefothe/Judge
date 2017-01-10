@@ -1,8 +1,11 @@
 package com.cefothe.judge.rest;
 
 import com.cefothe.judge.domain.dto.ExcerciseTO;
+import com.cefothe.judge.services.ExcerciseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -12,10 +15,16 @@ import java.util.concurrent.atomic.AtomicLong;
 @RequestMapping("/exercise")
 public class ExcerciseController {
 
+    @Autowired
+    private ExcerciseService excerciseService;
 
+    @GetMapping("/all")
+    public List<ExcerciseTO> getAll(){
+        return  excerciseService.getAll();
+    }
 
-//    @PostMapping
-//    public ExcerciseTO greeting(@RequestBody ExcerciseTO excerciseTO) {
-//        return new Greeting(String.format(template, name));
-//    }
+    @PostMapping
+    public void create(@RequestBody ExcerciseTO excerciseTO) {
+        excerciseService.create(excerciseTO);
+    }
 }
