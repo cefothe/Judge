@@ -5,5 +5,5 @@ package com.cefothe.judge.configuration;
  */
 public final class Configuration {
 
-    public static final String SAVE_FILE_DIRECTORY = "/home/cefothe/JUDGE";
+    public static final String SAVE_FILE_DIRECTORY = "/home/cefothe/JUDGE/";
 }

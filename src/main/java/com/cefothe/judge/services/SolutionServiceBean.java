@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -41,7 +42,7 @@ public class SolutionServiceBean implements SolutionService {
 
     @Override
     public String saveFileOnFileSystem(Solution solution) throws IOException {
-        String fileName = UUID.randomUUID().toString() +"." + solution.getProgramLanguage().getExtension();
+        String fileName = "Main" +"." + solution.getProgramLanguage().getExtension();
         try {
             fileIO.write(solution.getCode(), Configuration.SAVE_FILE_DIRECTORY,fileName);
         } catch (IOException e) {
@@ -63,21 +64,19 @@ public class SolutionServiceBean implements SolutionService {
     }
 
     @Override
+    public List<String> executor(String directory, String classNam, List<String> params) {
+        return null;
+    }
+
+    @Override
     public void execute(SolutionTO solutionTO) throws IOException {
         Solution solution = convertTO(solutionTO);
-        saveFileOnFileSystem(solution);
+        String fileName = saveFileOnFileSystem(solution);
         saveOnDatabase(solution);
+        compile(Configuration.SAVE_FILE_DIRECTORY,fileName,solution.getProgramLanguage());
     }
 
     private Solution convertTO(SolutionTO solutionTO){
-        PropertyMap<SolutionTO, Solution> orderMap = new PropertyMap<SolutionTO, Solution>() {
-            protected void configure() {
-                map().setCode(source.getCode());
-                map().setProgramLanguage(source.getProgramLanguage());
-            }
-        };
-        Solution solution = modelParser.convert(solutionTO, Solution.class,orderMap);
-        solution.setExercise(exerciseRepository.findOne(solutionTO.getExcerciseId()));
-        return solution;
+        return  new Solution(exerciseRepository.findOne(solutionTO.getExcerciseId()),solutionTO.getCode(),solutionTO.getProgramLanguage());
     }
 }

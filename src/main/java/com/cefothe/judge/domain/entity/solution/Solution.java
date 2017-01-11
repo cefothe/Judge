@@ -24,6 +24,11 @@ public class Solution extends EntityAdapter {
     @Column(name= "program_language")
     public ProgramLanguages programLanguage;
 
+    protected Solution(){
+
+    }
+
+
     public Solution(Exercise exercise, String code, ProgramLanguages programLanguage) {
         this.exercise = exercise;
         this.code = code;
