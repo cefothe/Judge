@@ -1,12 +1,13 @@
 package com.cefothe.judge.domain.dto;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by cefothe on 10.01.17.
  */
-public class ExcerciseTO {
+public class ExcerciseTO implements Serializable {
 
     public Long exerciseId;
 

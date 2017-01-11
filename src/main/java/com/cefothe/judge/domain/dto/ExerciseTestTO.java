@@ -1,9 +1,11 @@
 package com.cefothe.judge.domain.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by cefothe on 10.01.17.
  */
-public class ExerciseTestTO {
+public class ExerciseTestTO implements Serializable {
 
     public Long exerciseId;
 

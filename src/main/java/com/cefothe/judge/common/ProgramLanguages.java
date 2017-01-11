@@ -1,4 +1,4 @@
-package com.cefothe.judge;
+package com.cefothe.judge.common;
 
 import  com.cefothe.judge.compilers.Compiler;
 import com.cefothe.judge.compilers.JavaCompiler;
@@ -14,16 +14,18 @@ import java.lang.reflect.InvocationTargetException;
  */
 public enum ProgramLanguages {
 
-    JAVA(JavaCompiler.class, JavaExecutor.class);
+    JAVA(JavaCompiler.class, JavaExecutor.class, "java");
 
     private static final Logger LOG = Logger.getLogger(ProgramLanguages.class);
 
     Class<? extends Compiler> compiler;
     Class<? extends Executor> executor;
+    String extension;
 
-    ProgramLanguages(Class<? extends Compiler> compiler,Class<? extends Executor> executor){
+    ProgramLanguages(Class<? extends Compiler> compiler,Class<? extends Executor> executor, String extension){
         this.compiler = compiler;
         this.executor = executor;
+        this.extension = extension;
     }
 
     public Compiler compiler() {
@@ -45,4 +47,9 @@ public enum ProgramLanguages {
         }
         return null;
     }
+
+    public String getExtension() {
+        return extension;
+    }
+
 }
