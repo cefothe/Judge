@@ -15,6 +15,6 @@ public interface SolutionService {
     String saveFileOnFileSystem(Solution solution) throws IOException;
     void saveOnDatabase(Solution solution);
     void compile(String directory, String className, ProgramLanguages programLanguage) throws IOException;
-    List<String> executor(String directory, String classNam, List<String> params);
+    List<String> executor(String directory, String classNam, List<String> params, ProgramLanguages programLanguage) throws IOException;
     void execute(SolutionTO solutionTO) throws IOException;
 }

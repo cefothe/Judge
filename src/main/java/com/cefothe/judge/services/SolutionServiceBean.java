@@ -3,22 +3,21 @@ package com.cefothe.judge.services;
 import com.cefothe.judge.common.ProgramLanguages;
 import com.cefothe.judge.compilers.Compiler;
 import com.cefothe.judge.configuration.Configuration;
-import com.cefothe.judge.domain.dto.ExerciseTestTO;
 import com.cefothe.judge.domain.dto.SolutionTO;
-import com.cefothe.judge.domain.entity.exercises.ExerciseTest;
 import com.cefothe.judge.domain.entity.solution.Solution;
+import com.cefothe.judge.executors.Executor;
 import com.cefothe.judge.io.interfaces.FileIO;
 import com.cefothe.judge.parse.ModelParser;
 import com.cefothe.judge.repositories.ExerciseRepository;
 import com.cefothe.judge.repositories.SolutionRepository;
 import org.apache.log4j.Logger;
-import org.modelmapper.PropertyMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
+
 
 /**
  * Created by cefothe on 11.01.17.
@@ -64,8 +63,9 @@ public class SolutionServiceBean implements SolutionService {
     }
 
     @Override
-    public List<String> executor(String directory, String classNam, List<String> params) {
-        return null;
+    public List<String> executor(String directory, String classNam, List<String> params, ProgramLanguages programLanguage) throws IOException {
+        Executor executor = programLanguage.executor();
+        return executor.execute(directory, classNam, params);
     }
 
     @Override
@@ -74,6 +74,7 @@ public class SolutionServiceBean implements SolutionService {
         String fileName = saveFileOnFileSystem(solution);
         saveOnDatabase(solution);
         compile(Configuration.SAVE_FILE_DIRECTORY,fileName,solution.getProgramLanguage());
+
     }
 
     private Solution convertTO(SolutionTO solutionTO){
