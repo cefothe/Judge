@@ -1,0 +1,23 @@
+# Maven
+target/
+
+# OSX
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Eclipse
+.project
+.metadata
+.classpath
+.settings/
+*.launch
+
+# IntelliJ
+.idea/
+*.iml
+
+# Project-specific
+docker/volumes/cim-microservice/
+docker/volumes/eos-ftp-server/home/
