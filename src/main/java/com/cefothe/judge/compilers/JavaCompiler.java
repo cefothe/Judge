@@ -15,11 +15,9 @@ public class JavaCompiler implements  Compiler {
         Process process = new ProcessBuilder("javac",directory+className)
                 .redirectErrorStream(false)
                 .start();
-//
-//        Process process = Runtime.getRuntime().exec("javac "+ directory+className);
         BufferedReader br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        //Throw same exeption
+
        if(br!=null && br.readLine()!=null && !br.readLine().isEmpty()){
            throw  new IllegalArgumentException();
        }
